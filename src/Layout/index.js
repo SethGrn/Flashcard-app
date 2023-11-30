@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Main from "./Main.js"
+import NewDeck from "./NewDeck"
 
 function Layout() {
+  
+
+  const [decks, setDecks] = useState([]);
+
+  const updateDecks = (data) => {
+    setDecks(data)
+  }
+
   return (
     <>
       <Header />
       <div className="container">
-        
         <Switch>
-          <Router exact path="/">
-            <Main />
-          </Router>
+          <Route exact path="/">
+            <Main decks={decks} updateDecks={updateDecks} />
+          </Route>
 
-          <Router>
+          <Route path="/decks/new">
+            <NewDeck />
+          </Route>
+  
+          <Route>
             <NotFound />
-          </Router>
+          </Route>
         </Switch>
       </div>
     </>

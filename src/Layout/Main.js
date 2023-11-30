@@ -1,18 +1,26 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { useHistory, Link } from "react-router-dom"
+import DeckList from "./DeckList.js"
+import "./Main.css"
 
-function Main () {
+function Main ({ decks, updateDecks }) {
+
+    const history = useHistory();
+
+    useEffect(() => {
+        const getAPIData = async () => {
+            const getData = await fetch("http://localhost:8080/decks")
+            const data = await getData.json();
+            updateDecks(data);
+        }
+        getAPIData();
+    }, [])
+    
     return (
         <>
-            <button style={{marginBottom: 15}} type="button" class="btn btn-secondary btn-lg">+ Create Deck</button>
+            <button onClick={() => history.push("/decks/new")} type="button" className="btn btn-secondary btn-lg">+ Create Deck</button>
 
-            <div class="card" >
-            <div class="card-body">
-                <h5 class="card-title">Rendering in React</h5>
-                <p class="card-text">React's component structure allowd fot quickly building a complex web applicaiton that relies on DOM manipulaion.</p>
-                <a style={{marginRight: 10, fontSize: 20, paddingLeft: 20, paddingRight: 20}} href="/decks" class="btn btn-secondary">View</a>
-                <a style={{marginRight: 10, fontSize: 20, paddingLeft: 20, paddingRight: 20}} href="sheesh" class="btn btn-primary">Study</a>
-            </div>
-            </div>
+            <DeckList deckList={decks}/>
         </>
     )
 }
