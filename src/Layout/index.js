@@ -3,14 +3,15 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import { Switch, Route } from "react-router-dom";
 import Main from "./Main.js"
-import NewDeck from "./NewDeck"
+import NewDeck from "./NewDeck.js"
+import Deck from "./Deck.js"
+import NewCard from "./NewCard"
 
 function Layout() {
-  
 
   const [decks, setDecks] = useState([]);
 
-  const updateDecks = (data) => {
+  function updateDecks (data) {
     setDecks(data)
   }
 
@@ -20,11 +21,19 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route exact path="/">
-            <Main decks={decks} updateDecks={updateDecks} />
+            <Main decks={decks} setDecks={updateDecks}/>
           </Route>
 
           <Route path="/decks/new">
             <NewDeck />
+          </Route>
+
+          <Route path="/decks/:id/cards/new">
+            <NewCard />
+          </Route>
+
+          <Route path="/decks/:id">
+            <Deck />
           </Route>
   
           <Route>
@@ -33,7 +42,7 @@ function Layout() {
         </Switch>
       </div>
     </>
-  );
+  )
 }
 
 export default Layout;
