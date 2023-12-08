@@ -3,9 +3,10 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import { Switch, Route } from "react-router-dom";
 import Main from "./Main.js"
-import NewDeck from "./NewDeck.js"
+import NewCard from "./NewCard.js"
 import Deck from "./Deck.js"
-import NewCard from "./NewCard"
+import Study from "./Study"
+import EditDeck from "./EditDeck.js"
 
 function Layout() {
 
@@ -18,18 +19,23 @@ function Layout() {
   return (
     <>
       <Header />
+
       <div className="container">
         <Switch>
           <Route exact path="/">
             <Main decks={decks} setDecks={updateDecks}/>
           </Route>
 
-          <Route path="/decks/new">
-            <NewDeck />
+          <Route path="/decks/:id/study">
+            <Study />
           </Route>
 
           <Route path="/decks/:id/cards/new">
             <NewCard />
+          </Route>
+
+          <Route path="/decks/:id/edit">
+            <EditDeck />
           </Route>
 
           <Route path="/decks/:id">
