@@ -23,17 +23,9 @@ function Study () {
     }, [])
 
     useEffect(() => {
-        if (deck) {
-            if(message === back  && currentCard + 1 === deck.cards.length) {
-                if(window.confirm("Restart Cards? Click `cancel`to return to the home page")) {
-                    setCurrentCard(0);
-                    setMessage();
-                }else {
-                    history.push("/")
-                }
-            }
-        }
+        checkIfFinalCard()
     })
+    
 
     if (!deck) return <p>loading...</p>;
 
@@ -47,6 +39,7 @@ function Study () {
                         <li className="breadcrumb-item active" aria-current="page">Study</li>
                     </ol>
                 </nav>
+                <h1>Study: {deck.name}</h1>
                 <h5>Not enough cards</h5>
                 <p>You need at least 3 cards to study, there are {deck.cards.length} cards in this deck</p>
                 <button onClick={() => history.push(`/decks/${deck.id}/cards/new`)} type="button" className="btn btn-primary btn-lg">+ Add cards</button>
@@ -59,6 +52,19 @@ function Study () {
     let card = cards[currentCard];
     const { front } = card;
     const { back } = card;
+
+    function checkIfFinalCard () {
+        if (message) {
+            if(message === back  && currentCard + 1 === cards.length) {
+                if(window.confirm("Restart Cards? Click `cancel`to return to the home page")) {
+                    setCurrentCard(0);
+                    setMessage();
+                }else {
+                    history.push("/")
+                }
+            }
+        }
+    }
 
     if(!message) setMessage(front)
 

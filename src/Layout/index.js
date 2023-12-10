@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import { Switch, Route } from "react-router-dom";
-import Main from "./Main.js"
+import { listDecks, deleteDeck } from "../utils/api/index.js"
+import Main from "./Master.js"
 import NewCard from "./NewCard.js"
 import Deck from "./Deck.js"
 import Study from "./Study"
 import EditDeck from "./EditDeck.js"
+import NewDeck from "./NewDeck"
+import EditCard from "./EditCard"
 
 function Layout() {
 
   const [decks, setDecks] = useState([]);
 
+  useEffect(() => {
+    const getAPIData = async () => {
+        const getData = await listDecks();
+        setDecks(getData);
+    }
+    getAPIData();
+}, [])
+
   function updateDecks (data) {
     setDecks(data)
+  }
+
+  function deleteDeckHandler (idToDelete) {
+    if(window.confirm("Delete this deck? You will not be able to recover it")) {
+      deleteDeck(idToDelete)
+      setDecks((deckList) => {
+        return deckList.filter((deck) => deck.id !== idToDelete)
+      })
+    }
   }
 
   return (
@@ -23,11 +43,15 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route exact path="/">
-            <Main decks={decks} setDecks={updateDecks}/>
+            <Main decks={decks} deleteDeckHandler={deleteDeckHandler}/>
           </Route>
 
           <Route path="/decks/:id/study">
             <Study />
+          </Route>
+
+          <Route path="/decks/:id/cards/:cardId/edit">
+            <EditCard />
           </Route>
 
           <Route path="/decks/:id/cards/new">
@@ -36,6 +60,10 @@ function Layout() {
 
           <Route path="/decks/:id/edit">
             <EditDeck />
+          </Route>
+
+          <Route path="/decks/new">
+            <NewDeck />
           </Route>
 
           <Route path="/decks/:id">

@@ -36,7 +36,7 @@ function Deck () {
                             <p className="card-text ms-auto">{ card.front }</p>
                             <p className="card-text ms-auto">{ card.back }</p>
                             <div className="d-flex">
-                            <a href={`/decks/${deck.id}/edit`} className="btn btn-secondary">Edit</a>
+                            <a href={`/decks/${deck.id}/cards/${card.id}/edit`} className="btn btn-secondary">Edit</a>
                             <div className="ml-auto">
                                 <button onClick={() => {cardDeleteHandler(card.id)}} className="btn btn-primary bg-danger">Delete</button>
                             </div>

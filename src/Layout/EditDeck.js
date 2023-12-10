@@ -51,7 +51,7 @@ function EditDeck() {
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                    <li className="breadcrumb-item"><Link to="/">{ deck.name }</Link></li>
+                    <li className="breadcrumb-item"><Link to={`/decks/${id}`}>{ deck.name }</Link></li>
                     <li className="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
@@ -74,6 +74,7 @@ function EditDeck() {
                     name="description"
                     id="description"
                     placeholder="Add a Deck Description"
+                    rows="5" cols="60"
                     required
                     value={formData.description}
                     onChange={changeHandler}

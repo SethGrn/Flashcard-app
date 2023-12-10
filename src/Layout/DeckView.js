@@ -1,6 +1,6 @@
 import React from "react"
 
-function DeckView ({ deck, deleteHandler }) {
+function DeckView ({ deck, deleteDeckHandler }) {
 
     return (
         <div className="card">
@@ -12,7 +12,7 @@ function DeckView ({ deck, deleteHandler }) {
                 <a href={`/decks/${deck.id}`} className="btn btn-secondary">View</a>
                 <a href={`/decks/${deck.id}/study`} className="btn btn-primary">Study</a>
                 <div className="ml-auto">
-                    <button onClick={() => {deleteHandler()}} className="btn btn-primary bg-danger">Delete</button>
+                    <button onClick={() => {deleteDeckHandler()}} className="btn btn-primary bg-danger">Delete</button>
                 </div>
                 </div>
             </div>

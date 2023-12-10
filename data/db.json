@@ -6,12 +6,23 @@
       "description": "React's component structure allows for quickly building a complex web application that relies on DOM manipulation. "
     },
     {
-      "id": 2,
-      "name": "React Routerzz",
-      "description": "React Router is a collection of navigational components that compose declaratively with your application."
+      "name": "React Router",
+      "description": "React Router is a collection of navigational components that compose declaratively with your application.",
+      "id": 2
+    },
+    {
+      "name": "React",
+      "description": "Study the neccesities of React",
+      "id": 3
     }
   ],
   "cards": [
+    {
+      "id": 1,
+      "front": "Differentiate between Real DOM and Virtual DOM.",
+      "back": "Virtual DOM updates are faster but do not directly update the HTML",
+      "deckId": 1
+    },
     {
       "id": 2,
       "front": "How do you modify the state of a different React component?",
@@ -35,6 +46,22 @@
       "back": "Renders the first matching child <Route> ",
       "deckId": 2,
       "id": 5
+    },
+    {
+      "name": "",
+      "description": "",
+      "front": "Sheesh",
+      "back": "Hasheesh",
+      "deckId": 1,
+      "id": 6
+    },
+    {
+      "name": "",
+      "description": "",
+      "front": "HASHEESH",
+      "back": "HASHEESH",
+      "deckId": 2,
+      "id": 7
     }
   ]
 }
