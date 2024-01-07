@@ -6,7 +6,7 @@ import { listDecks, deleteDeck } from "../utils/api/index.js"
 import Main from "./Master.js"
 import NewCard from "./NewCard.js"
 import Deck from "./Deck.js"
-import Study from "./Study"
+import Study from "./StudyRoute/Study.js"
 import EditDeck from "./EditDeck.js"
 import NewDeck from "./NewDeck"
 import EditCard from "./EditCard"
@@ -47,7 +47,7 @@ function Layout() {
           </Route>
 
           <Route path="/decks/:id/study">
-            <Study />
+            <Study decks={ decks } />
           </Route>
 
           <Route path="/decks/:id/cards/:cardId/edit">

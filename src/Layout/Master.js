@@ -4,7 +4,6 @@ import DeckView from "./DeckView.js"
 import "./Master.css"
 
 function Master ({ decks, deleteDeckHandler }) {
-    console.log(decks)
 
     const history = useHistory();
 
@@ -15,7 +14,7 @@ function Master ({ decks, deleteDeckHandler }) {
     return (
         <>
             <button onClick={() => history.push("/decks/new")} type="button" className="btn btn-secondary btn-lg">+ Create Deck</button>
-            {mappedList}
+            { mappedList }
             
         </>
     )

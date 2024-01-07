@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { createCard, readDeck } from "../utils/api/index.js"
+import CardForm from "./CardForm.js"
 
 function NewDeck() {
 
@@ -32,9 +33,9 @@ function NewDeck() {
         })
     }
     
-    const submitHandler = async (event) => {
+    async function submitHandler (event) {
         event.preventDefault()
-        createCard(id, formData)
+        await createCard(id, formData)
         history.push(`/decks/${id}`)
     }
 
@@ -50,34 +51,7 @@ function NewDeck() {
             </ol>
             </nav>
             <h3>{ deck.name }: Add Card</h3>
-            <form onSubmit={submitHandler}>
-                <p>Front</p>
-                <textarea
-                    type="text"
-                    name="front"
-                    id="front"
-                    placeholder="Front side of card"
-                    rows="5"
-                    cols="100"
-                    required
-                    onChange={changeHandler}
-                />
-                <hr/>
-                <p>Back</p>
-                <textarea
-                    type="text"
-                    name="back"
-                    id="back"
-                    placeholder="Back side of card"
-                    rows="5"
-                    cols="100"
-                    required
-                    onChange={changeHandler}
-                />
-                <hr/>
-                <button type="button" className="btn btn-secondary" onClick={() => history.push("/")}>Cancel</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            <CardForm submitHandler={ submitHandler } formData={ formData } setFormData={ setFormData }/>
         </>
         
     )

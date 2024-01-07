@@ -10,21 +10,25 @@ function Deck () {
 
     const [deck, setDeck] = useState([]);
 
+    const [deletedCard, setDeletedCard ] = useState([])
+
     useEffect(() => {
         const getAPIData = async () => {
             const getData = await readDeck(params.id);
-            console.log(getData)
             setDeck(getData);
         }
         getAPIData();
-    }, [params])
+    }, [deletedCard])
 
     async function deleteHandler() {
         await deleteDeck(deck.id)
         history.push("/")
     }
-    async function cardDeleteHandler(cardId) {
-        await deleteCard(cardId)
+
+    async function cardDeleteHandler(idToDelete) {
+        await deleteCard(idToDelete)
+        setDeck([]);
+        setDeletedCard(!deletedCard)
     }
     
     if (deck.length === 0) return <p>Loading...</p>
