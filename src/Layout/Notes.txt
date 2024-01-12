@@ -1,8 +1,0 @@
-Plans:
-When I have the time, 
-set up nested routes so I can pass data down from parents instead of makeing a new fetch call everytime.
-
-Make a call to update the deck/cards but then edit the local data to make things seamless, 
-and eliminate unnessecary fetch calls.
-
-Also need to work on the edit Card and Deck files to make them better, they're sloppy right now.

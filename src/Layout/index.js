@@ -47,7 +47,7 @@ function Layout() {
           </Route>
 
           <Route path="/decks/:id/study">
-            <Study decks={ decks } />
+            <Study />
           </Route>
 
           <Route path="/decks/:id/cards/:cardId/edit">

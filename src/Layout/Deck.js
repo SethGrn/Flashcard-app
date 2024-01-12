@@ -13,7 +13,7 @@ function Deck () {
     const [deletedCard, setDeletedCard ] = useState([])
 
     useEffect(() => {
-        const getAPIData = async () => {
+        async function getAPIData () {
             const getData = await readDeck(params.id);
             setDeck(getData);
         }
@@ -31,7 +31,7 @@ function Deck () {
         setDeletedCard(!deletedCard)
     }
     
-    if (deck.length === 0) return <p>Loading...</p>
+    if (deck.length === 0) return <p>test...</p>
         else {
             const cardList = deck.cards.map((card) => {
                 return (

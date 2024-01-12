@@ -15,23 +15,19 @@ function EditDeck() {
     useEffect(() => {
         const getAPIData = async () => {
             const getData = await readDeck(id);
+            const initialFormData = {
+                id: id,
+                name: getData.name,
+                description: getData.description
+            }
+            console.log(initialFormData)
+            setFormData(initialFormData)
             setDeck(getData);
         }
         getAPIData();
-    }, [])
-
-    useEffect (() => {
-        if (deck) {
-            const initialFormData = {
-                id: id,
-                name: deck.name,
-                description: deck.description
-            }
-            setFormData(initialFormData)
-        }
-    }, [deck])
+    }, [id])
     
-    if (!formData) return <p>loading</p>
+    if (!deck) return <p>loading</p>
     
     const changeHandler = ({ target }) => {
         setFormData({
@@ -42,7 +38,7 @@ function EditDeck() {
     
     const submitHandler = async (event) => {
         event.preventDefault()
-        const data = await updateDeck(formData)
+        updateDeck(formData)
         history.push("/")
     }
     

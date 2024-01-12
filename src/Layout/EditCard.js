@@ -21,7 +21,7 @@ function EditCard() {
             setFormData(getCardData);
         }
         getAPIData();
-    }, [])
+    }, [id, cardId])
 
     if (!formData) return <p>loading...</p>
     

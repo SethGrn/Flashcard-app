@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useHistory, Link } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
+import { readDeck } from "../../utils/api/index.js"
 import UnderThreeCards from "./UnderThreeCards.js"
 import Breadcrumb from "./Breadcrumb.js"
 
-function Study ({ decks }) {
+function Study () {
 
     const history = useHistory()
 
     const { id } = useParams();
 
-    const deck = decks.find((deck) => deck.id === parseInt(id))
+    const [ deck, setDeck ] = useState()
 
     const [currentCard, setCurrentCard] = useState(0);
     
@@ -18,8 +19,13 @@ function Study ({ decks }) {
     const [cardIsFlipped, setCardIsFlipped] = useState(false)
 
     useEffect(() => {
-        checkIfFinalCard()
-    }, [cardIsFlipped])
+        async function getAPIData () {
+            const getData = await readDeck(id);
+            setDeck(getData);
+        }
+        getAPIData();
+    }, [id])
+
     
 
     if (!deck) return <p>loading...</p>;
@@ -40,7 +46,6 @@ function Study ({ decks }) {
 
     function checkIfFinalCard () {
             if(cardIsFlipped  && currentCard === (cards.length - 1)) {
-                console.log("window.confirm is called")
                 setTimeout(() => {
                     if(window.confirm("Restart Cards? Click `cancel`to return to the home page")) {
                         setCurrentCard(0);
@@ -58,6 +63,7 @@ function Study ({ decks }) {
         if (message === front) setMessage(back)
         else setMessage(front)
         setCardIsFlipped(!cardIsFlipped)
+        checkIfFinalCard()
     }
 
     function nextCard () {
@@ -68,9 +74,6 @@ function Study ({ decks }) {
     
     return (
         <>
-        { 
-            console.log("Function returns/items rendered", currentCard, message)
-        }
         <Breadcrumb deck={ deck } />
         <h1>Study: {deck.name}</h1>
 
@@ -80,7 +83,7 @@ function Study ({ decks }) {
                 <p className="card-text">{message}</p>
                 <div className="d-flex">
                     <button onClick={flipCard} className="btn btn-secondary">Flip</button>
-                    {(currentCard + 1 != cards.length && message === back) && <button onClick={() => nextCard()} className="btn btn-primary">Next</button>}
+                    {(currentCard + 1 !== cards.length && message === back) && <button onClick={() => nextCard()} className="btn btn-primary">Next</button>}
                 </div>
             </div>
         </div>
